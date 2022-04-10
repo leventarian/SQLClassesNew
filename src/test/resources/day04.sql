@@ -33,7 +33,6 @@ from (select distinct salary
       order by salary asc)
 where ROWNUM < 4;
 
-
 -- 15. find the 10th maximum salary from the employees table (do not include duplicates)
 select distinct salary
 from EMPLOYEES
@@ -44,7 +43,6 @@ from (select distinct salary
       from EMPLOYEES
       order by SALARY desc)
 where ROWNUM < 11;
-
 
 -- NEW TOPIC: JOINS --
 
@@ -164,13 +162,14 @@ Matching part + only unique for right and left table
 select first_name, last_name, c.address_id, a.address_id, address, phone
 from customer c
          full outer join address a
-                          on c.address_id = a.address_id;
+                         on c.address_id = a.address_id;
 
 
 --Display firstname, department from employees table
 select * from EMPLOYEES;
 
 select * from DEPARTMENTS;
+
 
 select first_name, DEPARTMENT_NAME
 from EMPLOYEES e inner join DEPARTMENTS d
@@ -184,11 +183,15 @@ select first_name, DEPARTMENT_NAME
 from EMPLOYEES e right outer join DEPARTMENTS d --RIGHT
     on e.DEPARTMENT_ID=d.department_ID;
 
-/*
- SELF JOIN
- */
+select first_name, DEPARTMENT_NAME
+from EMPLOYEES e full outer join DEPARTMENTS d --RIGHT
+    on e.DEPARTMENT_ID=d.department_ID;
 
- select * from EMPLOYEES;
+/*
+SELF JOIN
+*/
+
+select * from EMPLOYEES;
 
 select workers.first_name,managers.first_name
 from employees workers inner join employees managers
@@ -199,8 +202,6 @@ from employees workers left outer join employees managers
     on workers.manager_id=managers.EMPLOYEE_ID;
 
 
-
-
 -- Display first_name,department name from employees table
 
 select * from employees;
@@ -209,18 +210,17 @@ select * from departments;
 
 select first_name,department_name
 from employees e inner join departments d
-                            on e.department_id=d.department_id;
+on e.department_id=d.department_id;
 
 --left
 select first_name,department_name
 from employees e left outer join departments d
-                                 on e.department_id=d.department_id;
-
+on e.department_id=d.department_id;
 
 -- Right
 select first_name,department_name
 from departments d right outer join employees e
-                                    on d.department_id=e.department_id;
+on d.department_id=e.department_id;
 
 
 
@@ -230,27 +230,31 @@ from departments d right outer join employees e
 select * from employees;
 
 --Display All cities and related country names from hr database
-select l.city, c.COUNTRY_NAME from LOCATIONS l inner join COUNTRIES c
+select l.CITY, c.COUNTRY_NAME
+from LOCATIONS l inner join COUNTRIES c
 on l.COUNTRY_ID = c.COUNTRY_ID;
 
---Display all first_name and department_name including the  department without employee
+--Display all first_name and department_name including the departments without employee names
 select * from EMPLOYEES;
 select * from DEPARTMENTS;
 
-select FIRST_NAME, DEPARTMENT_NAME from EMPLOYEES e right outer join departments d
+select e.FIRST_NAME, d.DEPARTMENT_NAME
+from EMPLOYEES e right outer join departments d
 on e.DEPARTMENT_ID = d.DEPARTMENT_ID;
 
-select FIRST_NAME, DEPARTMENT_NAME from DEPARTMENTS d left outer join EMPLOYEES e
+select FIRST_NAME, DEPARTMENT_NAME
+from DEPARTMENTS d left outer join EMPLOYEES e
 on d.DEPARTMENT_ID = e.DEPARTMENT_ID;
 
 --Display all first_name and department_name
 -- including the  department without employee  and  employees       without departments
-select FIRST_NAME, DEPARTMENT_NAME from DEPARTMENTS d full outer join EMPLOYEES e
+select FIRST_NAME, DEPARTMENT_NAME
+from DEPARTMENTS d full outer join EMPLOYEES e
 on d.DEPARTMENT_ID = e.DEPARTMENT_ID;
 
 --Display first_name,last_name and department_name,city for all employees
-select FIRST_NAME, LAST_NAME, d.DEPARTMENT_NAME, CITY from EMPLOYEES e
-    inner join DEPARTMENTS d
+select FIRST_NAME, LAST_NAME, d.DEPARTMENT_NAME, CITY
+from EMPLOYEES e inner join DEPARTMENTS d
         on e.DEPARTMENT_ID = d.DEPARTMENT_ID
     inner join locations l
         on l.LOCATION_ID = d.LOCATION_ID;
