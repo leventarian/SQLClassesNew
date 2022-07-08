@@ -42,7 +42,7 @@ select STREET_ADDRESS, POSTAL_CODE from LOCATIONS;
  DISTINCT KEYWORD: removes duplicates from your request results
  Original data(with DUPs still in Database)
  */
- -- get me unique firstname from eployees
+ -- get me unique firstname from employees
  select distinct FIRST_NAME from EMPLOYEES;
 
 -- get me unique job_ids from employees
