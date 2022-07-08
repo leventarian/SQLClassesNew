@@ -51,7 +51,7 @@ select MANAGER_ID from EMPLOYEES
 where FIRST_NAME = 'Neena';
 
 select FIRST_NAME, LAST_NAME from EMPLOYEES
-where EMPLOYEE_ID in (select MANAGER_ID from EMPLOYEES
+where EMPLOYEE_ID = (select MANAGER_ID from EMPLOYEES
                       where FIRST_NAME = 'Neena');
 
 -- 8. find the 3rd maximum salary from the employees table (do not include duplicates)

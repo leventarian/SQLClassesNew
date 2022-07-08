@@ -85,5 +85,13 @@ order by DEPARTMENT_ID desc;
 
 -- 21. display all job_id and average salary who work as any of these jobs IT_PROG, SA_REP, FI_ACCOUNT, AD_VP
 
+
 -- 22. display max salary  for each department
+select DEPARTMENT_ID, max(SALARY) from EMPLOYEES
+group by DEPARTMENT_ID;
+
 -- 23. display total salary for each department except department_id 50, and where total salary >30000
+select DEPARTMENT_ID, sum(SALARY) from EMPLOYEES
+where DEPARTMENT_ID != 50
+group by DEPARTMENT_ID
+having sum(SALARY) > 30000;

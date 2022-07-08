@@ -315,7 +315,7 @@ select names from TESTERS; --  all the duplicates are removed now that we don't 
 
 select * from DEVELOPERS
 UNION all
-select * from TESTERS; -- UNION removes the duplicates, but even if salary is dif, it will add it
+select * from TESTERS;
 
 select names from DEVELOPERS
 UNION ALL

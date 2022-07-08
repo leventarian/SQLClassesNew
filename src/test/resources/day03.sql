@@ -9,32 +9,26 @@ from EMPLOYEES
 where JOB_ID LIKE '%IT%';
 
 -- get me all unique manager_ids
-select *
-from EMPLOYEES;
-select distinct MANAGER_ID
-from EMPLOYEES;
+select * from EMPLOYEES;
+select distinct MANAGER_ID from EMPLOYEES;
 -- 19 in total: this one counted the NULL value from the table
 
 -- get me how many different manager ID we have
-select count(distinct MANAGER_ID)
-from EMPLOYEES;
+select count(distinct MANAGER_ID) from EMPLOYEES;
 -- 18: COUNT does NOT count the null values
 
 -- how many employees we have for each manager
-select MANAGER_ID, count(*)
-from EMPLOYEES
+select MANAGER_ID, count(*) from EMPLOYEES
 group by MANAGER_ID;
 
 -- how many employees we have for each manager order by desc based on number of employees
-select MANAGER_ID, count(*)
-from EMPLOYEES
+select MANAGER_ID, count(*) from EMPLOYEES
 group by MANAGER_ID
 order by 2 desc;
 
 -- 23. Display total salary for EACH department except department_id 50,
 -- and where total salary > 30000
-select DEPARTMENT_ID, sum(SALARY)
-from EMPLOYEES
+select DEPARTMENT_ID, sum(SALARY) from EMPLOYEES
 where DEPARTMENT_ID <> 50
 group by DEPARTMENT_ID
 HAVING sum(SALARY) > 30000;
@@ -48,38 +42,30 @@ HAVING sum(SALARY) > 30000;
 select MAX(SALARY)
 from EMPLOYEES; -- 24000
 
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where SALARY = 24000;
 
 -- Dynamic Answer:
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where SALARY = (select MAX(SALARY) from EMPLOYEES);
 
 -- Display the second highest salary in the company?
 -- find max salary
-select MAX(SALARY)
-from EMPLOYEES;
+select MAX(SALARY) from EMPLOYEES;
 -- find second max
-select MAX(SALARY)
-from EMPLOYEES
+select MAX(SALARY) from EMPLOYEES
 where SALARY < 24000;
 --make it dynamic
-select MAX(SALARY)
-from EMPLOYEES
+select MAX(SALARY) from EMPLOYEES
 where SALARY < (select MAX(SALARY) from EMPLOYEES);
 
 -- Display all info for third highest?
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where SALARY = 17000;
 
 --make it dynamic
-select *
-from EMPLOYEES
-where SALARY = (select MAX(SALARY)
-                from EMPLOYEES
+select * from EMPLOYEES
+where SALARY = (select MAX(SALARY) from EMPLOYEES
                 where SALARY < (select MAX(SALARY) from EMPLOYEES));
 
 -- Display all employees who are making above the average salary
@@ -87,23 +73,11 @@ where SALARY = (select MAX(SALARY)
 select avg(SALARY)
 from EMPLOYEES;
 --get all employees who is making > avg
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where SALARY = (6462);
 --make it dynamic
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where SALARY = (select avg(SALARY) from EMPLOYEES);
-
-select * from EMPLOYEES;
-
-select DEPARTMENT_ID, sum(salary)
-from employees
-group by DEPARTMENT_ID;
-
-select workers.first_name, managers.first_name
-from employees workers right outer join employees managers
-on workers.manager_id = managers.employee_id;
 
 
 --NEW TOPIC--
@@ -116,20 +90,17 @@ where ROWNUM < 11;
 
 -- Display first 5 highest salary employees info in the company (INTERVIEW QUESTION)
 -- The whole table for reference in descending order:
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 order by SALARY desc;
 
 -- BAD PRACTICE: cuts the table before ordering
-select *
-from EMPLOYEES
+select * from EMPLOYEES
 where ROWNUM < 6
 order by SALARY desc;
 
 -- CORRECT WAY:
 select *
-from (select *
-      from EMPLOYEES
+from (select * from EMPLOYEES
       order by SALARY desc)
 where ROWNUM < 6;
 
@@ -156,8 +127,7 @@ from EMPLOYEES
 order by SALARY desc;
 
 select min(SALARY)
-from (select *
-      from EMPLOYEES
+from (select * from EMPLOYEES
       order by SALARY desc)
 where ROWNUM < 6;
 
@@ -170,8 +140,7 @@ where SALARY = 13500;
 select *
 from EMPLOYEES
 where SALARY = (select min(SALARY)
-                from (select *
-                      from EMPLOYEES
+                from (select * from EMPLOYEES
                       order by SALARY desc)
                 where ROWNUM < 6);
 
@@ -185,8 +154,7 @@ from EMPLOYEES
 order by SALARY desc;
 
 select min(SALARY)
-from (select distinct SALARY
-      from EMPLOYEES
+from (select distinct SALARY from EMPLOYEES
       order by SALARY desc)
 where ROWNUM < 6;
 
@@ -199,8 +167,7 @@ where SALARY = 13000;
 select *
 from EMPLOYEES
 where SALARY = (select min(SALARY)
-                from (select distinct SALARY
-                      from EMPLOYEES
+                from (select distinct SALARY from EMPLOYEES
                       order by SALARY desc)
                 where ROWNUM < 6);
 
@@ -254,8 +221,7 @@ from EMPLOYEES;
 
 -- LENGTH
 -- Task3: Display all the employees firstname and order by based on length of firstname
-select FIRST_NAME, length(FIRST_NAME)
-from EMPLOYEES
+select FIRST_NAME, length(FIRST_NAME) from EMPLOYEES
 order by length(FIRST_NAME) desc;
 -- can also put 2 as in index
 
@@ -399,14 +365,14 @@ commit;
 
 -- ADD NEW COLUMN --
 ALTER TABLE scrumteam
-    ADD gender varchar(20);
+ADD gender varchar(20);
 
 UPDATE scrumteam
 set gender='Male';
 
 -- RENAME COLUMN --
 ALTER TABLE scrumteam
-    RENAME COLUMN SALARY TO annual_salary;
+RENAME COLUMN SALARY TO annual_salary;
 
 -- DELETE -- DROP COLUMN --
 ALTER TABLE scrumteam

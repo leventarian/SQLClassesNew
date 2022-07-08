@@ -159,9 +159,6 @@ select round(AVG(SALARY),3) from EMPLOYEES; --6461.832
 select SUM(SALARY) from EMPLOYEES;
 
 
-
-
-
 select distinct JOB_ID from EMPLOYEES;
 
 -- Display average salary for 'IT_PROG'
